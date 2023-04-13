@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import HomePage from './Pages/HomePage/HomePage'
+import './assets/scss/global.scss'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<section className="main-app">
+			<header className="app-header">
+				<section className="container">
+					<h1>Contacts</h1>
+				</section>
+			</header>
+
+			<main className="container">
+				<HomePage />
+			</main>
+
+			<footer>
+				<section className="container">
+					ContactRights 2023 &copy;
+				</section>
+			</footer>
+		</section>
+	)
 }
 
-export default App;
+export default App
