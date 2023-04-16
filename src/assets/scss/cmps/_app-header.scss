@@ -1,0 +1,9 @@
+.app-header {
+  background: #d386e6;
+  color: white;
+
+  a:not(:first-child){
+    margin-inline-start: 20px;
+  }
+  
+}

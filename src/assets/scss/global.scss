@@ -20,10 +20,11 @@
 @import "views/contact-page";
 
 // Components
+@import "cmps/app-header";
 @import "cmps/contact-preview";
 @import "cmps/contact-list";
 @import "cmps/contact-filter";
-
+@import "cmps/loader";
 
 
 
@@ -31,11 +32,6 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-
-    .app-header {
-        background: #03a9f4;
-        color: white;
-    }
 
     main {
         flex-grow: 1;
