@@ -1,10 +1,17 @@
 .contact-filter {
-    display: flex;
-    flex-wrap: wrap;
-    margin-block: 20px;
-    gap: 20px;
-    > section {
-        display: flex;
-        flex-direction: column;
+    padding: em(10px) 0;
+
+    input{
+        padding:em(10px);
+        border:none;
+        border-radius: 4px;
+        background-color: #03a9f414;
+        color:$clr0;
+        font-size:em(16px);
+        
+
+       &::placeholder{
+            color:$clr0;
+        }
     }
 }

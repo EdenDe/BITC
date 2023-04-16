@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -9,12 +10,15 @@ html {
 }
 
 body {
+  background-image: url('../../img/backgroundImage.png');
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  background-size: cover;
   font-family: Calibri, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:$clr0;
 }
 
 img {
@@ -29,19 +33,18 @@ h5,
 h6,
 p {
   margin: 0;
-  font-weight: normal;
   padding: 0;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  &:hover {
-    text-decoration: underline;
-  }
+  // &:hover {
+  //   text-decoration: underline;
+  // }
 
   &.active{
-    color:purple
+    color:$clr1
   }
 }
 

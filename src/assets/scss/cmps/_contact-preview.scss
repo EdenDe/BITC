@@ -1,27 +1,41 @@
 .contact-preview {
-    background: #03a9f414;
+    background-color: #03a9f414;
     box-shadow: 0 0 11px #0000002b;
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
     cursor: pointer;
-    .info {
-        padding: 10px;
-        flex-grow: 1;
+    position: relative;
+
+    .img-wrapper{
+       img{
+        height: 150px;
+        object-fit: contain;  
+       }
     }
 
+    .icon-wrapper{
+      @include classic-btn;
+      color:$clr0;
+    }
+
+    h2{
+      text-align: center;
+    }
+  
     .actions {
-        display: flex;
-        align-items: center;
-        flex-basis: 25%;
-        padding: 10px;
-        color:white;
-        background-color: #000000c9;
-        transform: translateY(100%);
-        transition: transform 0.2s;
+      position: absolute;
+      top:0;
+      right:0;
+      
+      height: em(35px);
+      gap:em(10px);
+      padding: 10px;
+      color:white;
+       
+      transform: translateY(-100%);
+      transition: transform 0.5s;
     }
 
-    &:hover .actions {
-        transform: translateY(0);
+    &:hover :is(.actions,h2)  {
+      transform: translateY(0);
     }
 }

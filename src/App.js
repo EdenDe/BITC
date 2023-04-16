@@ -1,19 +1,19 @@
-import HomePage from './Pages/HomePage'
-import Contact from './Pages/ContactPage'
-import StatisticPage from './Pages/StatisticPage'
+import HomePage from './pages/HomePage'
+import Contact from './pages/ContactPage'
+import StatisticPage from './pages/StatisticPage'
 import './assets/scss/global.scss'
 import { AppHeader } from './components/AppHeader'
 import { Switch, Route, HashRouter as Router } from 'react-router-dom'
-import ContactDetails from './Pages/ContactDetailsPage'
-import ContactEditPage from './Pages/ContactEditPage'
+import ContactDetails from './pages/ContactDetailsPage'
+import ContactEditPage from './pages/ContactEditPage'
 
 export default function App() {
 	return (
 		<Router>
-			<section className="main-app">
+			<section className="main-layout">
 				<AppHeader />
 
-				<main className="container">
+				<main className="main-container-layout">
 					<Switch>
 						<Route
 							path="/contact/edit/:id?"
@@ -22,14 +22,12 @@ export default function App() {
 						<Route path="/contact/:id" component={ContactDetails} />
 						<Route path="/contact" component={Contact} />
 						<Route path="/statistic" component={StatisticPage} />
-						<Route path="/" component={HomePage} />
+						<Route exact path="/" component={HomePage} />
 					</Switch>
 				</main>
 
-				<footer>
-					<section className="container">
-						ContactRights 2023 &copy;
-					</section>
+				<footer className="full footer flex auto-center">
+					<section>Copyright 2023 &copy;</section>
 				</footer>
 			</section>
 		</Router>

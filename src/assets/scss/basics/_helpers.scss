@@ -134,3 +134,19 @@
         font-size: 15px;
     }
 }
+
+
+.tooltip{
+    position: relative;
+    &[data-tooltip]:hover::after{
+        content:attr(data-tooltip);
+        position: absolute;
+      
+        left:-5px;
+        transform: translate(-100%);
+        padding:0 em(5px);
+        background-color: rgba(rgb(45, 45, 45),0.8);
+        color:$clr0;
+
+    }
+}

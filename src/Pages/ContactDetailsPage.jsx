@@ -45,11 +45,11 @@ export default class ContactDetails extends Component {
         <section>
           <h3>Email: {contact.email}</h3>
         </section>
-        <img src={`https://robohash.org/${contact._id}?set=set4`} alt={contact.name} />
-        <Link to={`/contact/${contact.nextContactId}`}> next Robot</Link>
-        <Link to={`/contact/${contact.prevContactId}`}> prev Robot</Link>
+        <img src={`https://api.dicebear.com/6.x/adventurer/svg?seed=${contact._id}`} alt={contact.name} />
+        <Link to={`/contact/${contact.nextContactId}`}> next contact</Link>
+        <Link to={`/contact/${contact.prevContactId}`}> prev contact</Link>
 
-        <button onClick={this.onBack}>Back</button>
+        <button className='btn-back' onClick={this.onBack}>Back</button>
       </section>
     )
   }

@@ -1,3 +1,25 @@
-// .homepage{
-    
-// }
+.homepage{
+  place-self: center;
+  background-color: rgba($clr4,0.75);
+  padding:em(50px);
+  border-radius: em(10px);
+
+  .homepage-title{
+    font-size:em(27px);
+    margin-bottom: em(20px);
+    span{
+      font-weight:normal;
+    }
+  }
+
+  .data-item{
+    display:grid;
+    grid-template-columns: 30px 1fr;
+    margin-bottom: em(10px);
+    font-size: em(18px);
+  }
+
+  .icon-wrapper{
+    color:$logo-clr;
+  }
+}

@@ -1,11 +1,29 @@
 // Colors
-$clr1: #e01e5a;
-$clr2: #293241;
-$clr3: #5c3fc5;
-$clr4: #696969;
-$clr5: #e6e9ec;
+$clr0: #e6e9ec;
+$clr1: #01ffff;
+$clr2:#0083ed;
+$clr3:#015a8c;
+$clr4: #00003f;
+
+$logo-clr: #f7931a;
+
+// LAYOUT
+// $layoutPadding: 20px;
+
+// LAYOUT BREAKPOINTS
+$break-narrow: 600px;
+$break-normal: 768px;
+$break-wide: 900px;
 
 $navHeight: 65px;
+
+$layoutPaddingLarge: 100px;
+$layoutPaddingMedium: 80px;
+$layoutPaddingSmall: 10px;
+
+$padded-break-narrow: $break-narrow + $layoutPaddingSmall * 2;
+$padded-break-normal: $break-normal + $layoutPaddingMedium * 2;
+$padded-break-wide: $break-wide + $layoutPaddingLarge * 2;
 
 // Breakpoints
 $mobile-breakpoint: 600px;

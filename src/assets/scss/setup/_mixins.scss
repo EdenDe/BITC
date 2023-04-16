@@ -1,47 +1,49 @@
-/* Breakpoint mixins - Mobile First */
-// @mixin for-narrow-layout {
-//     @media (min-width: $mobile-breakpoint) {
-//         @content;
-//     }
-// }
+/* Media queries Breakpoint mixins */
 
-// @mixin for-normal-layout {
-//     @media (min-width: $narrow-breakpoint) {
-//         @content;
-//     }
-// }
-
-// @mixin for-wide-layout {
-//     @media (min-width: $normal-breakpoint) {
-//         @content;
-//     }
-// }
-
-/* Desktop First */
 @mixin for-mobile-layout {
-    @media (max-width: $mobile-breakpoint) {
-        @content;
-    }
+  @media (max-width:$padded-break-narrow) {
+    @content;
+  }
 }
 
-@mixin for-tablet-layout {
-    @media (max-width: $tablet-breakpoint) {
-        @content;
-    }
+@mixin for-narrow-layout {
+  @media (min-width:$padded-break-narrow) {
+    @content;
+  }
 }
 
 @mixin for-normal-layout {
-    @media (max-width: $normal-breakpoint) {
-        @content;
-    }
+  @media (min-width: $padded-break-normal) {
+    @content;
+  }
 }
 
 @mixin for-wide-layout {
-    @media (max-width: $wide-breakpoint) {
-        @content;
-    }
+  @media (min-width: $padded-break-wide) {
+    @content;
+  }
 }
 
+@mixin layoutGTC($max,$layoutPadding) {
+  grid-template-columns:
+    minmax(auto,$layoutPadding)
+    minmax($max,1fr)
+    minmax(auto,$layoutPadding);
+}
+
+
+
+@mixin classic-btn($bgColor : transparent){
+    background-color: $bgColor;
+    color:black;
+    font-family: inherit;
+    border:none;
+    border-radius: em(5px);
+
+    &:hover{
+      color:$clr1;
+    }
+}
 
 
 /* Media  Mixins */

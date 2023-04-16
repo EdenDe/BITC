@@ -22,7 +22,7 @@ export default class ContactFilter extends Component {
     const input = this.state.filterBy
 
     return (
-      <section className="contact-filter">
+      <section className="contact-filter flex">
           <input onChange={this.handleChange} value={input} type="text" placeholder='Search'/>
       </section>
     )

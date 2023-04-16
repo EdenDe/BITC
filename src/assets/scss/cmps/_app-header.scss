@@ -1,9 +1,53 @@
 .app-header {
-  background: #d386e6;
-  color: white;
+  position: relative;
+  height: 10vh;
+  align-items: end;
 
-  a:not(:first-child){
-    margin-inline-start: 20px;
+  .logo{
+    position: absolute;
+    left:0;
+    top:50%;
+    transform: translateY(-50%);
+
+    h1{
+      color:$clr0;
+      margin-left:em(5px);
+    }
+   
+    img{
+      height: 60px;
+    }
+  }
+
+  .nav-bar{
+    color: $clr0;
+
+    a{
+      border: 1px solid transparent;
+      border-radius: 1em;
+
+      &:not(:first-child){
+        margin-left: em(30px);
+      }
+      &:hover{
+        color:$clr1;
+      }
+      &.active{
+        color: $clr2;
+      }
+    }
+  }
+
+  .actions-wrapper{
+    position: absolute;
+    right:2px;
+    bottom: 0;
+    color:$clr0;
+
+    button{
+      @include classic-btn;
+      color:$clr0;
+    }
   }
   
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { userService } from '../services/user.service'
 import { bitcoinService } from '../services/bitcoin.service'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCoins ,faBitcoinSign} from '@fortawesome/free-solid-svg-icons';
 
 export default class HomePage extends Component {
 
@@ -29,17 +31,21 @@ export default class HomePage extends Component {
     const {name : userName, coins} = this.state.user
     const bitcoinRate = this.state.bitcoinRate
     return (
-      <>
-        <h2>Hello {userName}!</h2>
-        <div> 
-          <span>icon</span>
-          <span>Coins: {coins}</span>
+      <section className="homepage">
+        <h1 className="homepage-title"> <span>Hello</span> {userName}!</h1>
+        <div className='data-item'> 
+          <div className="icon-wrapper tooltip flex justify-center" data-tooltip='Coins'> 
+            <FontAwesomeIcon icon={faCoins}/>
+          </div>
+          <span> {coins}</span>
         </div>
-        <div> 
-          <span>icon</span>
-          <span>BTC: {bitcoinRate}</span>
+        <div className='data-item'> 
+          <div className="icon-wrapper tooltip flex justify-center" data-tooltip='BTC'>
+            <FontAwesomeIcon icon={faBitcoinSign} />
+          </div>
+          <span> {bitcoinRate}</span>
         </div>
-      </>
+      </section>
     )
   }
 }

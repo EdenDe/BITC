@@ -3,6 +3,8 @@ import {contactService} from '../services/contact.service'
 import ContactList from '../components/ContactList'
 import ContactFilter from '../components/ContactFilter'
 import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default class ContactPage extends Component {
 
@@ -40,9 +42,13 @@ export default class ContactPage extends Component {
     const {contacts,filterBy} = this.state
     if(!contacts) return <div>Loading...</div>
     return (
-      <section>
-        <ContactFilter filterBy={filterBy} onChangeFilter={this.onChangeFilter} />
-        <Link to="/contact/edit"> Add Contact</Link>
+      <section className="contact-page">
+        <div className="flex contact-actions"> 
+          <ContactFilter filterBy={filterBy} onChangeFilter={this.onChangeFilter} />
+          <Link to="/contact/edit" className="btn-add-contact flex">
+            <FontAwesomeIcon icon={faUserPlus} />
+          </Link>
+        </div>
         <ContactList contacts={contacts} onRemoveContact={this.onRemoveContact}/>     
       </section>
     )
