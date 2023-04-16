@@ -2,6 +2,7 @@
   position: relative;
   height: 10vh;
   align-items: end;
+  justify-content: center;
 
   .logo{
     position: absolute;
@@ -49,5 +50,44 @@
       color:$clr0;
     }
   }
-  
+
+  .nav-ham{
+    @include classic-btn($clr3);
+   
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    display:none;
+  }
+
+ 
+  @include for-mobile-layout{ 
+    justify-content: flex-end;
+    align-items: center;
+    
+    .actions-wrapper,.nav-bar{
+      display:none;
+    }
+
+    .nav-ham{
+      display:flex;
+    }
+
+    .nav-ham.open + .nav-bar{
+      display:flex;
+      flex-direction:column;
+      gap: 5px;
+      z-index: 11;
+      position: absolute;
+      top:100%;
+      padding:10px;
+      width:60vw;
+      background-color: $clr4;
+
+      a{
+        padding:10px;
+        margin:0;
+      }
+    }
+  }
 }

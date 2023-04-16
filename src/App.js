@@ -14,6 +14,7 @@ export default function App() {
 				<AppHeader />
 
 				<main className="main-container-layout">
+					<div className="screen"></div>
 					<Switch>
 						<Route
 							path="/contact/edit/:id?"

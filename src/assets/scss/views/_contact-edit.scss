@@ -1,3 +1,72 @@
-// .contact-edit{
-    
-// }
+.contact-edit{
+  margin-top:em(50px);
+
+  h1{
+    font-size: em(30px);
+    text-align: center;
+    margin-bottom: em(10px);
+  }
+
+  .card{
+    max-width: 300px;
+    margin:auto;
+    position: relative;
+    background-color: $card-bg-clr;
+    padding:20px;
+    border-radius: 5px;
+
+    .btn-delete{
+      @include classic-btn;
+      color:$clr0;
+      position: absolute;
+      top:10px;
+      right:10px;
+    }
+  
+    .img-wrapper{
+      img{
+        height: 120px;
+      }
+    }
+  }
+
+   form{
+    display:grid;
+ 
+    input{
+      margin-bottom: em(20px);
+      padding:em(10px);
+      border:none;
+      border-radius: 4px;
+      background-color: rgba($clr4,0.6);
+      color:$clr0;
+      font-size:em(16px);
+    }
+
+    .btn-save{
+      background: linear-gradient(-45deg, $clr1,$clr2,$clr3, $clr4);
+      border:none;
+      padding:em(5px);
+      border-radius: 5px;
+      font-weight:bold;
+      background-size: 400% 400%;
+      animation: gradient-bg 10s ease infinite;
+
+      &:hover{
+        scale: 1.05;
+      }
+    }
+   }
+}
+
+@keyframes gradient-bg {
+  0% {
+      background-position: 50% 0%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 50% 50%;
+  }
+}

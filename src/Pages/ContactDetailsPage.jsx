@@ -36,20 +36,21 @@ export default class ContactDetails extends Component {
     if (!contact) return <Loader/>
     return (
       <section className='contact-details'>
-        <section>
-          <h3>Name: {contact.name}</h3>
-        </section>
-        <section>
-          <h3>Phone: {contact.phone}</h3>
-        </section>
-        <section>
-          <h3>Email: {contact.email}</h3>
-        </section>
-        <img src={`https://api.dicebear.com/6.x/adventurer/svg?seed=${contact._id}`} alt={contact.name} />
-        <Link to={`/contact/${contact.nextContactId}`}> next contact</Link>
-        <Link to={`/contact/${contact.prevContactId}`}> prev contact</Link>
-
-        <button className='btn-back' onClick={this.onBack}>Back</button>
+        <div className="card">
+          <div className="img-wrapper">
+            <img src={`https://api.dicebear.com/6.x/adventurer/svg?seed=${contact._id}`} alt={contact.name} />
+          </div>
+          <div className="card-details flex column justify-center">        
+            <h3>{contact.name}</h3>
+            <h3>{contact.phone}</h3>       
+            <h3>{contact.email}</h3>
+          </div>
+        </div>
+        
+        <div className="card-actions flex space-between">
+          <Link to={`/contact/${contact.prevContactId}`}> PREV </Link>
+          <Link to={`/contact/${contact.nextContactId}`}> NEXT </Link>
+         </div>
       </section>
     )
   }

@@ -1,15 +1,13 @@
 .contact-page{
+  height: 100%;
+  overflow: hidden;
+  
   .btn-add-contact{
     @include classic-btn;
 
     padding:em(10px);
     display:inline-flex;
     color:$clr0;
-    width:100%;
     justify-content: flex-end;
   }
-
-  // .contact-actions{
-
-  // }
 }

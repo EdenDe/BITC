@@ -35,7 +35,7 @@
 
 @mixin classic-btn($bgColor : transparent){
     background-color: $bgColor;
-    color:black;
+    color:$clr0;
     font-family: inherit;
     border:none;
     border-radius: em(5px);

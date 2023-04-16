@@ -74,7 +74,7 @@ input {
 }
 
 ::-webkit-scrollbar-thumb:vertical {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba($clr1,0.5);
   -webkit-border-radius: 100px;
 }
 

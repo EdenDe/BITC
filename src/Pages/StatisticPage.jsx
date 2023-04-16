@@ -37,12 +37,15 @@ export default class StatisticPage extends Component {
     const {marketprice, conTrans} = this.state
     if(!marketprice || !conTrans) return <Loader/>
     return (
-      <section>
-        <h2> Market Price in the last 3 month </h2>
-        <Chart data={marketprice.map(x=> x.y)} color="red"/>
-
-        <h2> Confirmed Transitions in the last 3 month </h2>
-        <Chart data={conTrans.map(x=> x.y)} color="blue"/>
+      <section className="statistic-page">
+        <div>
+          <h2> Market Price in the last 3 months </h2>
+          <Chart data={marketprice.map(x=> x.y)} color="red"/>
+        </div>
+        <div> 
+          <h2> Confirmed Transitions in the last 3 months </h2>
+          <Chart data={conTrans.map(x=> x.y)} color="#f7931a"/>
+        </div>
       </section>
      
     )

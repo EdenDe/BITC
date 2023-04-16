@@ -1,0 +1,13 @@
+.statistic-page{
+  padding:em(30px);
+  height: 100%;
+  overflow:auto;
+
+  div{
+    margin:em(30px);
+    background-color:$card-bg-clr;
+    padding:em(20px);
+    border-radius: em(10px);
+    text-align: center;
+  }
+}

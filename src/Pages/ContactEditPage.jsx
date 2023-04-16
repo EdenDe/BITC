@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { contactService } from '../services/contact.service'
-import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 export default class ContactEditPage extends Component {
 
@@ -42,7 +43,9 @@ export default class ContactEditPage extends Component {
 
   onRemoveContact = async()=>{
     try {
-      await contactService.deleteContact(this.state.contact._id)
+      if(this.state.contact._id){
+        await contactService.deleteContact(this.state.contact._id)
+      }
       this.props.history.push('/contact')
     } catch (error) {
       console.log(error)
@@ -64,21 +67,27 @@ export default class ContactEditPage extends Component {
     const {name, phone, email} = this.state.contact
     return (
       <section className="contact-edit">
-        <Link to="/contact">back</Link>
         <h1>{contact._id? 'Edit' : 'Add' } Contact</h1>
-        <form onSubmit={this.onSaveContact}>
-          <label htmlFor='name'>Name</label>
-          <input onChange={this.handleChange} value={name} type="text" name="name" id="name"/>
+        <div className="card">
+          <button type="button" onClick={this.onRemoveContact} className="btn-delete">
+            <FontAwesomeIcon icon={faTrashCan} />
+          </button>
+          <div className="img-wrapper flex justify-center">
+            {contact._id &&<img src={`https://api.dicebear.com/6.x/adventurer/svg?seed=${contact._id}`} alt={contact.name} />}
+          </div>
+          <form onSubmit={this.onSaveContact}>
+            <label htmlFor='name'>Name</label>
+            <input onChange={this.handleChange} value={name} type="text" name="name" id="name"/>
 
-          <label htmlFor='phone'>Phone</label>
-          <input onChange={this.handleChange} value={phone} type="tel" name="phone" id="phone"/>
+            <label htmlFor='phone'>Phone</label>
+            <input onChange={this.handleChange} value={phone} type="tel" name="phone" id="phone"/>
 
-          <label htmlFor='email'>Email</label>
-          <input onChange={this.handleChange} value={email} type="email" name="email" id="email"/>
-
-          <button type="button" onClick={this.onRemoveContact}>Delete</button>
-          <button>Save</button>
-        </form>
+            <label htmlFor='email'>Email</label>
+            <input onChange={this.handleChange} value={email} type="email" name="email" id="email"/>
+           
+            <button className="btn-save">Save</button>    
+          </form>
+        </div>
       </section>
     )
   }

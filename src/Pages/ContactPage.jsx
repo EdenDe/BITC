@@ -43,9 +43,9 @@ export default class ContactPage extends Component {
     if(!contacts) return <div>Loading...</div>
     return (
       <section className="contact-page">
-        <div className="flex contact-actions"> 
+        <div className="flex space-between"> 
           <ContactFilter filterBy={filterBy} onChangeFilter={this.onChangeFilter} />
-          <Link to="/contact/edit" className="btn-add-contact flex">
+          <Link to="/contact/edit" className="btn-add-contact flex align-center">
             <FontAwesomeIcon icon={faUserPlus} />
           </Link>
         </div>
