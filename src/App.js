@@ -1,5 +1,5 @@
 import HomePage from './pages/HomePage'
-import Contact from './pages/ContactPage'
+import { ContactPage } from './pages/ContactPage'
 import StatisticPage from './pages/StatisticPage'
 import './assets/scss/global.scss'
 import { AppHeader } from './components/AppHeader'
@@ -21,7 +21,7 @@ export default function App() {
 							component={ContactEditPage}
 						/>
 						<Route path="/contact/:id" component={ContactDetails} />
-						<Route path="/contact" component={Contact} />
+						<Route path="/contact" component={ContactPage} />
 						<Route path="/statistic" component={StatisticPage} />
 						<Route exact path="/" component={HomePage} />
 					</Switch>

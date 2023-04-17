@@ -5,21 +5,26 @@ import ContactFilter from '../components/ContactFilter'
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import {connect} from 'react-redux';
+import { SET_CONTACT } from '../store/reducers/contact.reducer'
 
-export default class ContactPage extends Component {
-
-  state = {
-    contacts: null,
-    filterBy:''
-  }
+export class _ContactPage extends Component {
 
   componentDidMount(){
     this.loadContacts()
   }
 
   loadContacts = async ()=>{
-    const contacts = await contactService.getContacts(this.state.filterBy)
-    this.setState({contacts})
+    try {
+      const contacts = await contactService.getContacts(this.props.filterBy)
+      const action = {
+        type: SET_CONTACT,
+        contacts
+      }
+      this.props.dispatch(action)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   onRemoveContact= async (contactId)=>{
@@ -54,3 +59,10 @@ export default class ContactPage extends Component {
     )
   }
 }
+
+const mapStateToProps = (state)=> ({
+  contacts: state.contacts,
+  filterBy: state.filterBy,
+})
+
+export const ContactPage = connect(mapStateToProps)(_ContactPage)
