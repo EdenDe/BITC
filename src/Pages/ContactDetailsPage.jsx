@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import { contactService } from '../services/contact.service'
 import Loader from '../components/Loader'
 import {Link} from 'react-router-dom'
+import {TransferFund} from '../components/TransferFund'
+import { authService } from '../services/auth.service'
+import MovesList from '../components/MovesList'
 
 export default class ContactDetails extends Component {
   state = {
-    contact: null
+    contact: null,
+    loggedUser: authService.getLoggedInUser()
   }
 
   componentDidMount() {
@@ -33,6 +37,7 @@ export default class ContactDetails extends Component {
 
   render() {
     const contact = this.state.contact
+    const loggedUser = this.state.loggedUser
     if (!contact) return <Loader/>
     return (
       <section className='contact-details'>
@@ -50,7 +55,10 @@ export default class ContactDetails extends Component {
         <div className="card-actions flex space-between">
           <Link to={`/contact/${contact.prevContactId}`}> PREV </Link>
           <Link to={`/contact/${contact.nextContactId}`}> NEXT </Link>
-         </div>
+        </div>
+        
+        <TransferFund contact={contact} maxAmount={loggedUser.coins}/>
+        <MovesList moves={loggedUser.moves.filter(move=> move.toId === contact._id).map(move=> {delete move.to; return move })} title="Your Moves"/>
       </section>
     )
   }

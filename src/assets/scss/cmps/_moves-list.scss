@@ -1,0 +1,19 @@
+.moves-list{
+  h1{
+    font-size: em(25px);
+  }
+
+  .move-item{
+    display:grid;
+    gap:em(5px);
+  }
+
+   h1,.move-item{
+    background-color: $card-bg-clr;
+    border-radius: em(5px);
+    margin: em(5px);
+    padding: em(5px);
+  }
+
+ 
+}

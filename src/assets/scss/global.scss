@@ -1,5 +1,3 @@
-// Externals
-
 // Setup
 @import "setup/variables";
 @import "setup/functions";
@@ -19,6 +17,7 @@
 @import "views/contact-edit";
 @import "views/contact-page";
 @import "views/statistic-page";
+@import "views/signup-page";
 
 // Components
 @import "cmps/app-header";
@@ -26,6 +25,8 @@
 @import "cmps/contact-list";
 @import "cmps/contact-filter";
 @import "cmps/loader";
+@import "cmps/moves-list";
+@import "cmps/transfer-fund";
 
 
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { userService } from '../services/user.service'
+
 import { bitcoinService } from '../services/bitcoin.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCoins ,faBitcoinSign} from '@fortawesome/free-solid-svg-icons';
+import { authService } from '../services/auth.service';
+import MovesList from '../components/MovesList';
 
 export default class HomePage extends Component {
 
@@ -17,7 +19,9 @@ export default class HomePage extends Component {
   }
 
   loadUser =()=>{
-    this.setState({user :userService.getUser()}) 
+    const user = authService.getLoggedInUser()
+    if(user)this.setState({user})
+    else this.props.history.push('/signup')
   }
 
   loadBitcoinRate = async () =>{
@@ -28,23 +32,28 @@ export default class HomePage extends Component {
   render() {
     if (!this.state.user || !this.state.bitcoinRate) return <div>Loading...</div>
 
-    const {name : userName, coins} = this.state.user
+    const {userName, coins,moves} = this.state.user
+    console.log(userName)
     const bitcoinRate = this.state.bitcoinRate
     return (
       <section className="homepage">
-        <h1 className="homepage-title"> <span>Hello</span> {userName}!</h1>
-        <div className='data-item'> 
-          <div className="icon-wrapper tooltip flex justify-center" data-tooltip='Coins'> 
-            <FontAwesomeIcon icon={faCoins}/>
+        <section className="homepage-details"> 
+          <h1 className="homepage-title"> <span>Hello</span> {userName}!</h1>
+          <div className='data-item'> 
+            <div className="icon-wrapper tooltip flex justify-center" data-tooltip='Coins'> 
+              <FontAwesomeIcon icon={faCoins}/>
+            </div>
+            <span>{coins}</span>
           </div>
-          <span> {coins}</span>
-        </div>
-        <div className='data-item'> 
-          <div className="icon-wrapper tooltip flex justify-center" data-tooltip='BTC'>
-            <FontAwesomeIcon icon={faBitcoinSign} />
+          <div className='data-item'> 
+            <div className="icon-wrapper tooltip flex justify-center" data-tooltip='BTC'>
+              <FontAwesomeIcon icon={faBitcoinSign} />
+            </div>
+            <span> {bitcoinRate}</span>
           </div>
-          <span> {bitcoinRate}</span>
-        </div>
+        </section>
+       {moves.length && <MovesList moves={moves.slice(3)} title="Your last 3 Moves"/>}
+
       </section>
     )
   }

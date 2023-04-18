@@ -1,0 +1,38 @@
+.signup-page{
+  position: absolute;
+  inset:0;
+  background-color: $clr4;
+
+  .signup-wrapper{
+    padding: em(100px);
+    .img-wrapper{
+      margin-bottom: em(30px);
+      img{
+        height:90px;
+      }
+    } 
+
+    h1{
+      font-size: em(40px);
+      text-align: center;
+      margin-bottom: em(20px);
+    }
+
+    form{
+      display:grid;
+      gap: 10px;
+      max-width:250px;
+      margin:auto;
+
+      button{
+        @include spceial-btn;
+      }
+
+      input{
+        @include classic-input;
+        color: $clr4;
+      }
+    }
+  }
+  
+}

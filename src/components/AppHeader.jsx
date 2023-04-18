@@ -17,7 +17,6 @@ function _AppHeader(props) {
     target.classList.toggle("open")
   }
 
-
   return (
     <header className="app-header flex">
       <section className="logo flex auto-center">

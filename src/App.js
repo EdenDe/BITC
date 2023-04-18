@@ -6,6 +6,7 @@ import { AppHeader } from './components/AppHeader'
 import { Switch, Route, HashRouter as Router } from 'react-router-dom'
 import ContactDetails from './pages/ContactDetailsPage'
 import ContactEditPage from './pages/ContactEditPage'
+import SignupPage from './pages/SignupPage'
 
 export default function App() {
 	return (
@@ -23,7 +24,8 @@ export default function App() {
 						<Route path="/contact/:id" component={ContactDetails} />
 						<Route path="/contact" component={ContactPage} />
 						<Route path="/statistic" component={StatisticPage} />
-						<Route exact path="/" component={HomePage} />
+						<Route path="/signup" component={SignupPage} />
+						<Route path="/" component={HomePage} />
 					</Switch>
 				</main>
 

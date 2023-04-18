@@ -8,7 +8,7 @@ import {faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import { SET_CONTACT } from '../store/reducers/contact.reducer'
 
-export class _ContactPage extends Component {
+class _ContactPage extends Component {
 
   componentDidMount(){
     this.loadContacts()
@@ -29,10 +29,10 @@ export class _ContactPage extends Component {
 
   onRemoveContact= async (contactId)=>{
     try {
-      await contactService.deleteContact(contactId)
-      this.setState(({contacts})=> ({
-        contacts: contacts.filter(contact=> contact._id !== contactId)
-      }))
+      // await contactService.deleteContact(contactId)
+      // this.setState(({contacts})=> ({
+      //   contacts: contacts.filter(contact=> contact._id !== contactId)
+      // }))
 
     } catch (error) {
       console.log(error)
@@ -40,11 +40,11 @@ export class _ContactPage extends Component {
   }
 
   onChangeFilter=(filterBy)=>{
-    this.setState({ filterBy }, this.loadContacts)
+    //this.setState({ filterBy }, this.loadContacts)
   }
 
   render() {
-    const {contacts,filterBy} = this.state
+    const {contacts,filterBy} = this.props
     if(!contacts) return <div>Loading...</div>
     return (
       <section className="contact-page">
