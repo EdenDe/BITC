@@ -1,7 +1,7 @@
 import { authService } from '../../services/auth.service'
-import { SET_USER } from '../actions/user.actions'
+import { SET_USER } from '../reducers/user.reducer'
 
-export function spendBalance(conatct, amount) {
+export function transferCoins(conatct, amount) {
 	return async dispatch => {
 		try {
 			const user = authService.addMove(conatct, amount)

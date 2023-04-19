@@ -1,3 +1,11 @@
 .transfer-fund{
-  
+  width: fit-content;
+  display:grid;
+  margin:auto;
+  form{
+    display:grid;
+  }
+  button{
+    @include classic-btn($logo-clr)
+  }
 }

@@ -1,30 +1,15 @@
-import React, { Component } from 'react'
+import { useForm } from '../customHooks/useForm'
 
 
-export default class ContactFilter extends Component {
-    
-  state = {
-      filterBy: ''
-  }
-
-  componentDidMount() {
-      this.setState({ filterBy: this.props.filterBy })
-  }
-
-  handleChange = ({ target }) => {
-      this.setState(
-          ({ filterBy: target.value }),
-          () => this.props.onChangeFilter(this.state.filterBy)
-      )
-  }
-
-  render() {
-    const input = this.state.filterBy
+const ContactFilter =({filter,onChangeFilter})=>{
+  const [register] = useForm(filter,onChangeFilter)
 
     return (
       <section className="contact-filter flex">
-          <input onChange={this.handleChange} value={input} type="text" placeholder='Search'/>
+          <input {...register('filter')} placeholder='Search'/>
       </section>
     )
-  }
+  
 }
+
+export default ContactFilter

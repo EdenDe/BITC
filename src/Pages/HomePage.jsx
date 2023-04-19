@@ -1,49 +1,40 @@
-import React, { Component } from 'react'
+import React, { useState,useEffect } from 'react'
 
 import { bitcoinService } from '../services/bitcoin.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCoins ,faBitcoinSign} from '@fortawesome/free-solid-svg-icons';
-import { authService } from '../services/auth.service';
 import MovesList from '../components/MovesList';
+import {useSelector} from 'react-redux';
+import {useNavigate } from 'react-router-dom'
 
-export default class HomePage extends Component {
+const HomePage =()=> {
+  const user = useSelector((storeState)=> storeState.userModule.loggedInUser)
+  const [bitcoinRate,setBitcoinRate] = useState()
+  const navigate = useNavigate()
 
-  state = {
-    user: null,
-    bitcoinRate : null,
-  }
+  useEffect(()=>{
+    loadBitcoinRate()  
+  },[])
 
-  componentDidMount(){
-    this.loadUser()
-    this.loadBitcoinRate()
-  }
 
-  loadUser =()=>{
-    const user = authService.getLoggedInUser()
-    if(user)this.setState({user})
-    else this.props.history.push('/signup')
-  }
-
-  loadBitcoinRate = async () =>{
+  const loadBitcoinRate = async () =>{
     const bitcoinRate = await bitcoinService.getRate()
-    this.setState({bitcoinRate :bitcoinRate }) 
+    setBitcoinRate(bitcoinRate) 
   }
 
-  render() {
-    if (!this.state.user || !this.state.bitcoinRate) return <div>Loading...</div>
+  if(!user){
+    navigate('/signup')
+  }
 
-    const {userName, coins,moves} = this.state.user
-    console.log(userName)
-    const bitcoinRate = this.state.bitcoinRate
-    return (
+  return (
       <section className="homepage">
         <section className="homepage-details"> 
-          <h1 className="homepage-title"> <span>Hello</span> {userName}!</h1>
+          <h1 className="homepage-title"> <span>Hello</span> {user.username}!</h1>
           <div className='data-item'> 
             <div className="icon-wrapper tooltip flex justify-center" data-tooltip='Coins'> 
               <FontAwesomeIcon icon={faCoins}/>
             </div>
-            <span>{coins}</span>
+            <span>{user.coins}</span>
           </div>
           <div className='data-item'> 
             <div className="icon-wrapper tooltip flex justify-center" data-tooltip='BTC'>
@@ -52,9 +43,11 @@ export default class HomePage extends Component {
             <span> {bitcoinRate}</span>
           </div>
         </section>
-       {moves.length && <MovesList moves={moves.slice(3)} title="Your last 3 Moves"/>}
+       {user.moves.length && <MovesList moves={user.moves.slice(0,3)} title="Your last 3 Moves"/>}
 
       </section>
     )
-  }
+  
 }
+
+export default HomePage

@@ -10,7 +10,7 @@ import {
 export function loadContacts() {
 	return async (dispatch, getState) => {
 		try {
-			const contacts = await contactService.query(
+			const contacts = await contactService.getContacts(
 				getState().contactModule.filterBy
 			)
 			const action = {
@@ -24,7 +24,7 @@ export function loadContacts() {
 	}
 }
 
-export function addContact(conatct) {
+export function saveContact(conatct) {
 	return async dispatch => {
 		try {
 			const contacts = await contactService.saveContact(conatct)
@@ -54,8 +54,8 @@ export function removeContact(conatctId) {
 	}
 }
 
-export function setFilterBy(filterBy) {
+export function setFilterBy({ filter }) {
 	return dispatch => {
-		dispatch({ type: SET_FILTER, filterBy })
+		dispatch({ type: SET_FILTER, filterBy: filter })
 	}
 }

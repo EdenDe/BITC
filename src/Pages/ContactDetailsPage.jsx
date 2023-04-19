@@ -1,44 +1,48 @@
-import React, { Component } from 'react'
+import React, { useState,useEffect } from 'react'
 import { contactService } from '../services/contact.service'
 import Loader from '../components/Loader'
-import {Link} from 'react-router-dom'
+import {Link,useParams} from 'react-router-dom'
 import {TransferFund} from '../components/TransferFund'
-import { authService } from '../services/auth.service'
 import MovesList from '../components/MovesList'
+import { useDispatch,useSelector } from 'react-redux'
+import { transferCoins} from '../store/actions/user.actions'
 
-export default class ContactDetails extends Component {
-  state = {
-    contact: null,
-    loggedUser: authService.getLoggedInUser()
-  }
+const ContactDetails = ()=> {
+  const [contact, setContact] = useState(null)
+  const user = useSelector(storeState=> storeState.userModule.loggedInUser)
+  const params = useParams()
+  const dispatch = useDispatch()
 
-  componentDidMount() {
-    this.loadContact()
-  }
+  useEffect(()=>{
+    loadContact()
+  },[params.id])
 
-  componentDidUpdate(prevProps,prevState){
-    if(prevProps.match.params.id !== this.props.match.params.id){
-      this.loadContact()
-    }
-  }
 
-  loadContact = async () => {
+  const loadContact = async () => {
     try {
-      const contact = await contactService.getContactById(this.props.match.params.id)
-      this.setState({ contact })
+      const contact = await contactService.getContactById(params.id)
+      setContact(contact)
     } catch (error) {
       console.log('error:', error)
     }
   }
 
-  onBack = () =>{
-    this.props.history.push('/contact')
+  const onTransferAmount=(amount)=>{
+    dispatch(transferCoins(contact,amount))
   }
 
-  render() {
-    const contact = this.state.contact
-    const loggedUser = this.state.loggedUser
-    if (!contact) return <Loader/>
+  const getMoveList=()=>{
+    return user.moves.filter(move=> move.toId === contact._id)
+            .map(move=> {
+              delete move.to
+              return move
+            })
+     
+  }
+
+  if(!contact){
+    return <Loader/>
+  }
     return (
       <section className='contact-details'>
         <div className="card">
@@ -57,9 +61,12 @@ export default class ContactDetails extends Component {
           <Link to={`/contact/${contact.nextContactId}`}> NEXT </Link>
         </div>
         
-        <TransferFund contact={contact} maxAmount={loggedUser.coins}/>
-        <MovesList moves={loggedUser.moves.filter(move=> move.toId === contact._id).map(move=> {delete move.to; return move })} title="Your Moves"/>
+        <TransferFund contactName={contact.name} maxAmount={user.coins} transferAmount={onTransferAmount}/>
+        <MovesList moves={getMoveList()} title="Your Moves"/>
       </section>
     )
-  }
+  
 }
+
+
+export default ContactDetails

@@ -1,7 +1,11 @@
 import React from 'react'
 
 export default function MovesList({moves,title}) {
-  console.log(moves)
+
+  if(!moves.length){
+    return <></>
+  }
+
   return (
     <section className="moves-list">
       <h1>{title}</h1>

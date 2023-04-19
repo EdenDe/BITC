@@ -27,8 +27,6 @@
     @include for-wide-layout {
         @include layoutGTC( $break-wide,$layoutPaddingLarge);
     }
-
-
 }
 
 .main-container-layout{
@@ -55,4 +53,7 @@
     background-color:$clr4;
     color: $clr2;
     height: 3vh;
+    // position: fixed;
+    // width:100%;
+    // bottom:0;
 }

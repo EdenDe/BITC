@@ -1,16 +1,16 @@
 import React, {useState } from 'react'
 import { authService } from '../services/auth.service'
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
  export default function SignupPage() {
   const [user, setUser] = useState(authService.getEmptyUser())
-  let history = useHistory();
+  const navigate = useNavigate()
 
   const onSignup = async (ev) =>{
     ev.preventDefault()
     try {
       await authService.signup(user)
-      history.push('/homepage')
+      navigate('/homepage')
     } catch (error) {
       console.log(error)
     }

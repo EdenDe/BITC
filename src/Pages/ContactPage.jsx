@@ -1,68 +1,49 @@
-import React, { Component } from 'react'
-import {contactService} from '../services/contact.service'
+import React, { useEffect } from 'react'
 import ContactList from '../components/ContactList'
 import ContactFilter from '../components/ContactFilter'
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import {connect} from 'react-redux';
-import { SET_CONTACT } from '../store/reducers/contact.reducer'
+import {useSelector,useDispatch} from 'react-redux';
+import {loadContacts,removeContact,setFilterBy} from '../store/actions/contact.action'
 
-class _ContactPage extends Component {
+const ContactPage = ()=> {
+  const contacts = useSelector((storeState)=> storeState.contactModule.contacts)
+  const filterBy = useSelector((storeState)=> storeState.contactModule.filterBy)
 
-  componentDidMount(){
-    this.loadContacts()
-  }
+  const dispatch = useDispatch()
 
-  loadContacts = async ()=>{
+  useEffect(()=>{
+    dispatch(loadContacts())
+  },[dispatch])
+
+
+  const onRemoveContact= (contactId)=>{
     try {
-      const contacts = await contactService.getContacts(this.props.filterBy)
-      const action = {
-        type: SET_CONTACT,
-        contacts
-      }
-      this.props.dispatch(action)
+      dispatch(removeContact(contactId))
+      dispatch(loadContacts())
     } catch (error) {
       console.log(error)
     }
   }
 
-  onRemoveContact= async (contactId)=>{
-    try {
-      // await contactService.deleteContact(contactId)
-      // this.setState(({contacts})=> ({
-      //   contacts: contacts.filter(contact=> contact._id !== contactId)
-      // }))
-
-    } catch (error) {
-      console.log(error)
-    }
+  const onChangeFilter=(filter = {})=>{
+    dispatch(setFilterBy(filter))
+    dispatch(loadContacts())
   }
 
-  onChangeFilter=(filterBy)=>{
-    //this.setState({ filterBy }, this.loadContacts)
-  }
 
-  render() {
-    const {contacts,filterBy} = this.props
-    if(!contacts) return <div>Loading...</div>
-    return (
-      <section className="contact-page">
-        <div className="flex space-between"> 
-          <ContactFilter filterBy={filterBy} onChangeFilter={this.onChangeFilter} />
-          <Link to="/contact/edit" className="btn-add-contact flex align-center">
-            <FontAwesomeIcon icon={faUserPlus} />
-          </Link>
-        </div>
-        <ContactList contacts={contacts} onRemoveContact={this.onRemoveContact}/>     
-      </section>
-    )
-  }
+  return (
+    <section className="contact-page">
+      <div className="flex space-between"> 
+        <ContactFilter filter={filterBy} onChangeFilter={onChangeFilter} />
+        <Link to="/contact/edit" className="btn-add-contact flex align-center">
+          <FontAwesomeIcon icon={faUserPlus} />
+        </Link>
+      </div>
+      <ContactList contacts={contacts} onRemoveContact={onRemoveContact}/>     
+    </section>
+  )
 }
 
-const mapStateToProps = (state)=> ({
-  contacts: state.contacts,
-  filterBy: state.filterBy,
-})
-
-export const ContactPage = connect(mapStateToProps)(_ContactPage)
+export default ContactPage

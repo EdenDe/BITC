@@ -1,89 +1,81 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { contactService } from '../services/contact.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useParams,useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { removeContact, saveContact } from '../store/actions/contact.action';
+import { useForm } from '../customHooks/useForm';
+import Loader from '../components/Loader';
 
-export default class ContactEditPage extends Component {
+const ContactEditPage = ()=> {
+  const params = useParams()
 
-  state = {
-    contact: contactService.getEmptyContact()
-  }
+  const [contact, setContact] = useState(contactService.getEmptyContact())
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-   componentDidMount=async()=>{
-    const contactId = this.props.match.params.id
+  const [register,setFields] = useForm(contact,setContact)
+
+  useEffect(()=>{
+    getContact()
+  },[])
+
+  const getContact= async()=>{
+    const contactId = params.id
+
     if(contactId){
       try {
-        const contact = await contactService.getContactById(contactId)
-        this.setState({contact})
+        setFields(await contactService.getContactById(contactId)) 
       } catch (error) {
         console.log(error)
       }
-    }
+    } 
   }
   
-  handleChange = ({ target }) => {
-    const field = target.name
-    let value = target.value
 
-    switch (target.type) {
-      case 'number':
-      case 'range':
-        value = +value
-        break;
-      case 'checkbox':
-        value = target.checked
-        break;
-      default:
-        break;
-    }
-    this.setState(
-      ({ contact }) => ({ contact: { ...contact, [field]: value } })
-    )
-  }
-
-  onRemoveContact = async()=>{
+  const onRemoveContact = async()=>{
     try {
-      if(this.state.contact._id){
-        await contactService.deleteContact(this.state.contact._id)
+      if(contact._id){
+        dispatch(removeContact(contact._id))
       }
-      this.props.history.push('/contact')
+      navigate('/contact')
     } catch (error) {
       console.log(error)
     }
   }
 
-  onSaveContact = async (ev) =>{
+  const onSaveContact = async (ev) =>{
     ev.preventDefault()
     try {
-      await contactService.saveContact({...this.state.contact})
-      this.props.history.push('/contact')
+      dispatch(saveContact(contact))
+      navigate('/contact')
     } catch (error) {
       console.log(error)
     }
   }
 
-  render() {
-    const {contact} = this.state
-    const {name, phone, email} = this.state.contact
+    if(!contact) return <Loader/>
+
     return (
       <section className="contact-edit">
         <h1>{contact._id? 'Edit' : 'Add' } Contact</h1>
         <div className="card">
-          <button type="button" onClick={this.onRemoveContact} className="btn-delete">
+          <button type="button" onClick={onRemoveContact} className="btn-delete">
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
           <div className="img-wrapper flex justify-center">
             {contact._id &&<img src={`https://api.dicebear.com/6.x/adventurer/svg?seed=${contact._id}`} alt={contact.name} />}
           </div>
-          <form onSubmit={this.onSaveContact}>
+          <form onSubmit={onSaveContact}>
             <label htmlFor='name'>Name</label>
-            <input onChange={this.handleChange} value={name} type="text" name="name" id="name"/>
+            <input {...register('name')}/>
 
             <label htmlFor='phone'>Phone</label>
-            <input onChange={this.handleChange} value={phone} type="tel" name="phone" id="phone"/>
+            <input {...register('phone','tel')}/>
 
             <label htmlFor='email'>Email</label>
-            <input onChange={this.handleChange} value={email} type="email" name="email" id="email"/>
+            <input {...register('email','email')}/>
            
             <button className="btn-save">Save</button>    
           </form>
@@ -91,4 +83,7 @@ export default class ContactEditPage extends Component {
       </section>
     )
   }
-}
+
+
+
+export default ContactEditPage

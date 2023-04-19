@@ -13,6 +13,8 @@ const KEY_CONTACTS = 'contactsDB'
 
 let gContacts
 
+_loadContacts()
+
 function sort(arr) {
 	return arr.sort((a, b) => {
 		if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {

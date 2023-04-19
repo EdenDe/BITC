@@ -1,11 +1,11 @@
 import HomePage from './pages/HomePage'
-import { ContactPage } from './pages/ContactPage'
+import ContactPage from './pages/ContactPage'
 import StatisticPage from './pages/StatisticPage'
 import './assets/scss/global.scss'
-import { AppHeader } from './components/AppHeader'
-import { Switch, Route, HashRouter as Router } from 'react-router-dom'
+import AppHeader from './components/AppHeader'
+import { Routes, Route, HashRouter as Router } from 'react-router-dom'
 import ContactDetails from './pages/ContactDetailsPage'
-import ContactEditPage from './pages/ContactEditPage'
+import ContactEdit from './pages/ContactEditPage'
 import SignupPage from './pages/SignupPage'
 
 export default function App() {
@@ -16,17 +16,17 @@ export default function App() {
 
 				<main className="main-container-layout">
 					<div className="screen"></div>
-					<Switch>
+					<Routes>
 						<Route
 							path="/contact/edit/:id?"
-							component={ContactEditPage}
+							element={<ContactEdit />}
 						/>
-						<Route path="/contact/:id" component={ContactDetails} />
-						<Route path="/contact" component={ContactPage} />
-						<Route path="/statistic" component={StatisticPage} />
-						<Route path="/signup" component={SignupPage} />
-						<Route path="/" component={HomePage} />
-					</Switch>
+						<Route path="/contact/:id" element={<ContactDetails />} />
+						<Route path="/contact" element={<ContactPage />} />
+						<Route path="/statistic" element={<StatisticPage />} />
+						<Route path="/signup" element={<SignupPage />} />
+						<Route path="/" element={<HomePage />} />
+					</Routes>
 				</main>
 
 				<footer className="full footer flex auto-center">

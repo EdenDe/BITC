@@ -1,16 +1,19 @@
 import React from 'react'
-import {NavLink, withRouter} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowLeft,faArrowRight,faBars } from '@fortawesome/free-solid-svg-icons';
 
-function _AppHeader(props) {
+const AppHeader=()=> {
+
+  //const loggedinUser = useSelector((storeState)=> storeState.userModule.loggedInUser)
+   const navigate = useNavigate()
 
   function onBack(){  
-    props.history.goBack()
+    navigate(-1)
   }
 
   function onForward(){
-    props.history.goForward()
+    navigate(1)
   }
 
   function toggleNav({target}){
@@ -43,4 +46,4 @@ function _AppHeader(props) {
   )
 }
 
-export const AppHeader = withRouter(_AppHeader)
+export default AppHeader
