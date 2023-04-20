@@ -1,20 +1,30 @@
-import React, {useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { authService } from '../services/auth.service'
 import { useNavigate } from "react-router-dom";
+import {useDispatch,useSelector} from 'react-redux';
+import { addUser } from '../store/actions/user.actions';
 
  export default function SignupPage() {
+  const loggedUser = useSelector((storeState)=> storeState.userModule.loggedInUser)
+
   const [user, setUser] = useState(authService.getEmptyUser())
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onSignup = async (ev) =>{
     ev.preventDefault()
     try {
-      await authService.signup(user)
-      navigate('/homepage')
+      dispatch(addUser(user))
+  
     } catch (error) {
       console.log(error)
     }
   }
+
+  useEffect(()=>{
+    if(loggedUser)navigate('/')
+    
+  },[loggedUser])
 
   const handleChange=({target})=>{
     setUser({...user, username: target.value})

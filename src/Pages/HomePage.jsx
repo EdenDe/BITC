@@ -11,9 +11,14 @@ const HomePage =()=> {
   const user = useSelector((storeState)=> storeState.userModule.loggedInUser)
   const [bitcoinRate,setBitcoinRate] = useState()
   const navigate = useNavigate()
-
+  
   useEffect(()=>{
     loadBitcoinRate()  
+     
+    if(!user){ 
+      navigate('/signup')
+    }
+
   },[])
 
 
@@ -22,9 +27,11 @@ const HomePage =()=> {
     setBitcoinRate(bitcoinRate) 
   }
 
-  if(!user){
-    navigate('/signup')
+  if(!user){ 
+    return <></>
   }
+  
+
 
   return (
       <section className="homepage">

@@ -11,3 +11,14 @@ export function transferCoins(conatct, amount) {
 		}
 	}
 }
+
+export function addUser(credentials) {
+	return async dispatch => {
+		try {
+			const user = await authService.signup(credentials)
+			dispatch({ type: SET_USER, user })
+		} catch (error) {
+			console.log('error:', error)
+		}
+	}
+}
