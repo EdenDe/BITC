@@ -1,6 +1,6 @@
 <h1> BITC </h1>
 
-<p>Deploy: <a href="edende.github.io/mister-bitcoin"> edende.github.io/mister-bitcoin </p>
+<p>Deploy: <a href="https://edende.github.io/BITC/"> edende.github.io/BITC </p>
 
 <p> BITC is a web application that allows users to view and manage their Bitcoin transactions. Users can view their balance, send and receive Bitcoin, and view their transaction history. </p>
 
